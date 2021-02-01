@@ -1,0 +1,2 @@
+Juan;1234;Administrador
+Agustin;1234;Supervisor
