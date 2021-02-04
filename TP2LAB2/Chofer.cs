@@ -27,7 +27,16 @@ namespace TP2LAB2
 
         public string BackUp()
         {
-            return nombre + ";" + dni + ";" + cuitCuil + ";" + domicilio + ";" + telefono + ";" + fechaNac + ";" + estadoCivil + ";" + nacionalidad;
+            return "chofer;"
+                + nombre + ";"
+                + domicilio + ";"
+                + estadoCivil + ";"
+                + nacionalidad + ";"
+                + dni + ";"
+                + cuitCuil + ";"
+                + telefono + ";"
+                + edad + ";"
+                + fechaNac;  
         }
     }
 }

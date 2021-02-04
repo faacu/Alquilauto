@@ -58,7 +58,12 @@ namespace TP2LAB2
 
         public string BackUp()
         {
-            return orden + ";" + Fecha + ";" + FechaDevolucion + ";" + auto.Patente + ";" + cliente.DNI + ";" + PrecioFinal;
+            return "alquiler;"
+                + cliente.BackUp() 
+                + ';' + auto.BackUp() 
+                + ';' + fecha
+                + ';' + dias
+                + ';' + UnidadCosto;
         }
 
         // Propiedades

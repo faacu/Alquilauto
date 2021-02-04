@@ -98,9 +98,14 @@ namespace TP2LAB2
             set { disponible = value; }
         }
 
-        public string BackUp()
+        public virtual string BackUp()
         {
-            return Modelo + ";" + Patente + ";" + Capacidad + ";" + TipoCombustible + ";" + Valor;
+            return "vehiculo;"
+                + modelo + ';'
+                + tipoCombustible + ';'
+                + patente + ';'
+                + capacidad + ';'
+                + valor;
         }
     }
 }
