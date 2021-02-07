@@ -613,12 +613,12 @@ namespace TP2LAB2
 
         private void alquileresToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(miAdministracion.BackUp(2));
+            MessageBox.Show(miAdministracion.BackUp());
         }
 
         private void clientesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(miAdministracion.BackUp(3));
+            MessageBox.Show(miAdministracion.BackUp());
         }
 
         private void ayudaToolStripMenuItem_Click(object sender, EventArgs e)
@@ -677,14 +677,24 @@ namespace TP2LAB2
 
         }
 
+        private void importarDatosDesdeArchivoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog archivo = new OpenFileDialog();
+            archivo.ShowDialog();
+            if (Directory.Exists(archivo.FileName)==true)
+                MessageBox.Show(miAdministracion.Importar(archivo.FileName));
+            else
+                MessageBox.Show("Archivo o directorio no encontrado");
+        }
+
         private void vehiculosToolStripMenuItem_Click(object sender, EventArgs e)
         {
-           MessageBox.Show(miAdministracion.BackUp(1));
+           MessageBox.Show(miAdministracion.BackUp());
         }
 
         private void backUpToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            MessageBox.Show(miAdministracion.BackUp());
         }
 
         private void bt_Estadistica_Click(object sender, EventArgs e)

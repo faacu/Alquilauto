@@ -62,14 +62,11 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.menuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.backUpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.vehiculosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.alquileresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.clientesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ayudaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.agregarUsuarioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.choferesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.importarDatosDesdeArchivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gb_Busqueda.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -430,6 +427,7 @@
             // 
             this.menuToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.backUpToolStripMenuItem,
+            this.importarDatosDesdeArchivoToolStripMenuItem,
             this.ayudaToolStripMenuItem,
             this.agregarUsuarioToolStripMenuItem});
             this.menuToolStripMenuItem.Name = "menuToolStripMenuItem";
@@ -439,41 +437,15 @@
             // 
             // backUpToolStripMenuItem
             // 
-            this.backUpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.vehiculosToolStripMenuItem,
-            this.alquileresToolStripMenuItem,
-            this.clientesToolStripMenuItem,
-            this.choferesToolStripMenuItem});
             this.backUpToolStripMenuItem.Name = "backUpToolStripMenuItem";
-            this.backUpToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.backUpToolStripMenuItem.Text = "BackUp";
+            this.backUpToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
+            this.backUpToolStripMenuItem.Text = "Exportar datos";
             this.backUpToolStripMenuItem.Click += new System.EventHandler(this.backUpToolStripMenuItem_Click);
-            // 
-            // vehiculosToolStripMenuItem
-            // 
-            this.vehiculosToolStripMenuItem.Name = "vehiculosToolStripMenuItem";
-            this.vehiculosToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
-            this.vehiculosToolStripMenuItem.Text = "Vehiculos";
-            this.vehiculosToolStripMenuItem.Click += new System.EventHandler(this.vehiculosToolStripMenuItem_Click);
-            // 
-            // alquileresToolStripMenuItem
-            // 
-            this.alquileresToolStripMenuItem.Name = "alquileresToolStripMenuItem";
-            this.alquileresToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
-            this.alquileresToolStripMenuItem.Text = "Alquileres";
-            this.alquileresToolStripMenuItem.Click += new System.EventHandler(this.alquileresToolStripMenuItem_Click);
-            // 
-            // clientesToolStripMenuItem
-            // 
-            this.clientesToolStripMenuItem.Name = "clientesToolStripMenuItem";
-            this.clientesToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
-            this.clientesToolStripMenuItem.Text = "Clientes";
-            this.clientesToolStripMenuItem.Click += new System.EventHandler(this.clientesToolStripMenuItem_Click);
             // 
             // ayudaToolStripMenuItem
             // 
             this.ayudaToolStripMenuItem.Name = "ayudaToolStripMenuItem";
-            this.ayudaToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
+            this.ayudaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.ayudaToolStripMenuItem.Text = "Ayuda ";
             this.ayudaToolStripMenuItem.Click += new System.EventHandler(this.ayudaToolStripMenuItem_Click);
             // 
@@ -481,7 +453,7 @@
             // 
             this.agregarUsuarioToolStripMenuItem.Enabled = false;
             this.agregarUsuarioToolStripMenuItem.Name = "agregarUsuarioToolStripMenuItem";
-            this.agregarUsuarioToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
+            this.agregarUsuarioToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.agregarUsuarioToolStripMenuItem.Text = "Agregar Usuario";
             this.agregarUsuarioToolStripMenuItem.Click += new System.EventHandler(this.agregarUsuarioToolStripMenuItem_Click);
             // 
@@ -503,11 +475,12 @@
             this.pictureBox2.TabIndex = 1;
             this.pictureBox2.TabStop = false;
             // 
-            // choferesToolStripMenuItem
+            // importarDatosDesdeArchivoToolStripMenuItem
             // 
-            this.choferesToolStripMenuItem.Name = "choferesToolStripMenuItem";
-            this.choferesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.choferesToolStripMenuItem.Text = "Choferes";
+            this.importarDatosDesdeArchivoToolStripMenuItem.Name = "importarDatosDesdeArchivoToolStripMenuItem";
+            this.importarDatosDesdeArchivoToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
+            this.importarDatosDesdeArchivoToolStripMenuItem.Text = "Importar desde archivo";
+            this.importarDatosDesdeArchivoToolStripMenuItem.Click += new System.EventHandler(this.importarDatosDesdeArchivoToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -588,13 +561,10 @@
         private System.Windows.Forms.ToolStripMenuItem menuToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem backUpToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ayudaToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem vehiculosToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem alquileresToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem clientesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem agregarUsuarioToolStripMenuItem;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.PictureBox pictureBox2;
-        private System.Windows.Forms.ToolStripMenuItem choferesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem importarDatosDesdeArchivoToolStripMenuItem;
     }
 }
 

@@ -15,13 +15,14 @@ namespace TP2LAB2
     {
         List<Vehiculo> ListaDeVehiculos = new List<Vehiculo>();
         List<VehiculoConChofer> ListaDeVehiculosConChofer = new List<VehiculoConChofer>();
-        List<Alquiler> registro = new List<Alquiler>();
+        List<Alquiler> registro = new List<Alquiler>(); // Alquileres activos
         Empresa empresa;
         double unidad;
         List<Alquiler> historico = new List<Alquiler>(); // Alquileres finalizados
+        int IdFacturas = 0;
 
         // Constructor
-        public Administracion() 
+        public Administracion()
         {
             empresa = new Empresa();
         }
@@ -32,9 +33,9 @@ namespace TP2LAB2
             get { return historico; }
         }
         public List<Alquiler> VerAlquiler
-            {
-                get { return registro; }
-            }
+        {
+            get { return registro; }
+        }
         public List<Vehiculo> listaDeVehiculos
         {
             get { return ListaDeVehiculos; }
@@ -99,7 +100,7 @@ namespace TP2LAB2
             Vehiculo buscado;
             if (tipo == true)
             {
-                buscado = new VehiculoConChofer("", "", patente, 1, 1,"","","","","","","","",0);
+                buscado = new VehiculoConChofer("", "", patente, 1, 1, "", "", "", "", "", "", "", "", 0);
                 buscado.Patente = patente;
                 i = listaDeVehiculosConChofer.BinarySearch((VehiculoConChofer)buscado);
             }
@@ -141,7 +142,7 @@ namespace TP2LAB2
             alquiler.KmRecorridos = km;
             registro.RemoveAt(indice);
             int dias = fecha.Day - alquiler.Fecha.Day;
-            int demora=0;
+            int demora = 0;
 
             if (dias <= alquiler.Dias && fecha.Hour < 22)
             {
@@ -154,7 +155,7 @@ namespace TP2LAB2
                 {
                     demora++;
                 }
-                alquiler.PrecioFinal += alquiler.Precio+ alquiler.Auto.Valor * alquiler.UnidadCosto * 1.10 * demora;
+                alquiler.PrecioFinal += alquiler.Precio + alquiler.Auto.Valor * alquiler.UnidadCosto * 1.10 * demora;
             }
 
             double kmPermitidos = (alquiler.Dias + demora) * 500;
@@ -199,15 +200,15 @@ namespace TP2LAB2
         public string Ticket(int indice)
         {
             Alquiler alquiler = registro[indice];
-            return "TICKET:\nRazon Social: "+empresa.RazonSocial+ "\nVehiculo: " + alquiler.Auto.Modelo + "\nPatente: " + alquiler.Auto.Patente + "\nCliente: " + alquiler.VerCliente.nombre + "\nFecha Alquiler: " + alquiler.Fecha.ToString("dd/MM/yyyy") + "\nFecha Devolucion: " + alquiler.FechaDevolucion.ToString("dd/MM/yyyy") + "\nValor: $" + alquiler.Precio;
+            return "TICKET:\nRazon Social: " + empresa.RazonSocial + "\nVehiculo: " + alquiler.Auto.Modelo + "\nPatente: " + alquiler.Auto.Patente + "\nCliente: " + alquiler.VerCliente.nombre + "\nFecha Alquiler: " + alquiler.Fecha.ToString("dd/MM/yyyy") + "\nFecha Devolucion: " + alquiler.FechaDevolucion.ToString("dd/MM/yyyy") + "\nValor: $" + alquiler.Precio;
         }
         public string Factura(Alquiler alquiler)
         {
             string texto;
             if (alquiler.Auto is VehiculoConChofer)
-                texto = "Razon Social: "+empresa.RazonSocial+ "\nCliente: "+alquiler.VerCliente.Nombre+ "\nCuit: "+alquiler.VerCliente.cuitCuil+"\nPatente: " + alquiler.Auto.Patente + "Km recorridos: " + alquiler.KmRecorridos + "\nValor Inicial: $" + alquiler.Precio.ToString() + "\nViáticos: $" + alquiler.Viaticos + "\nValor Final: $" + alquiler.PrecioFinal;
+                texto = "Razon Social: " + empresa.RazonSocial + "\nCliente: " + alquiler.VerCliente.Nombre + "\nCuit: " + alquiler.VerCliente.cuitCuil + "\nPatente: " + alquiler.Auto.Patente + "Km recorridos: " + alquiler.KmRecorridos + "\nValor Inicial: $" + alquiler.Precio.ToString() + "\nViáticos: $" + alquiler.Viaticos + "\nValor Final: $" + alquiler.PrecioFinal;
             else texto = "Razon Social: " + empresa.RazonSocial + "\nCliente: " + alquiler.VerCliente.Nombre + "\nCuit: " + alquiler.VerCliente.cuitCuil + "\nPatente: " + alquiler.Auto.Patente + "Km recorridos: " + alquiler.KmRecorridos + "\nValor Inicial: $" + alquiler.Precio.ToString() + "\nValor Final: $" + alquiler.PrecioFinal;
-            
+
             return texto;
         }
         public void AgregarConductor(int indice, Conductor unConductor)
@@ -217,7 +218,7 @@ namespace TP2LAB2
         public string BajaVehiculo(int indice, bool chofer)
         {
             string mensaje = "";
-            if(chofer == true)
+            if (chofer == true)
             {
                 if (listaDeVehiculosConChofer[indice].Disponible == true)
                 {
@@ -237,59 +238,89 @@ namespace TP2LAB2
             }
             return mensaje;
         }
-        public string BackUp (int tipo)//1-Vehiculo,2-Alquileres,3-Clientes
+        public string BackUp()
         {
-            FileStream fls;
-            StreamWriter swr;
-            switch (tipo)
-            {
-                case 1:
-                    fls = new FileStream("vehiculo.csv", FileMode.Create, FileAccess.Write);
-                    swr = new StreamWriter(fls);
-                    for (int i = 0; i < listaDeVehiculos.Count; i++)
-                    {
-                        swr.WriteLine(listaDeVehiculos[i].BackUp());
-                    }
-                    for (int i = 0; i < listaDeVehiculosConChofer.Count; i++)
-                    {
-                        swr.WriteLine(listaDeVehiculosConChofer[i].BackUp());
-                    }
-                    fls.Dispose();
-                    swr.Dispose();
-                    break;
-                case 2:
-                    fls = new FileStream("alquileres.csv", FileMode.Create, FileAccess.Write);
-                    swr = new StreamWriter(fls);
-                    for (int i = 0; i < registro.Count; i++)
-                    {
-                        swr.WriteLine(registro[i].BackUp());
-                    }
-                    fls.Dispose();
-                    swr.Dispose();
-                    break;
-                case 3:
-                    fls = new FileStream("clientes.csv", FileMode.Create, FileAccess.Write);
-                    swr = new StreamWriter(fls);
-                    for (int i = 0; i < registro.Count; i++)
-                    {
-                        swr.WriteLine(registro[i].VerCliente.BackUp());
-                    }
-                    fls.Dispose();
-                    swr.Dispose();
-                    break;
-                case 4:
-                    fls = new FileStream("clientes.csv", FileMode.Create, FileAccess.Write);
-                    swr = new StreamWriter(fls);
-                    foreach(VehiculoConChofer a in ListaDeVehiculosConChofer)
-                    {
-                        swr.WriteLine(a.Conductor.BackUp());
-                    }
-                    fls.Dispose();
-                    swr.Dispose();
-                    break;
+            //string archivo = "BackUp(" + DateTime.Now + ").csv";
+            FileStream fls = new FileStream("Back Up.csv", FileMode.Create, FileAccess.Write);
+            StreamWriter swr = new StreamWriter(fls);
 
+            foreach (Alquiler a in registro)
+            {
+                swr.WriteLine(a.BackUp());
             }
-            return "BackUp exitoso";
+            foreach (Vehiculo v in listaDeVehiculos)
+            {
+                swr.WriteLine(v.BackUp());
+            }
+            foreach (VehiculoConChofer vc in listaDeVehiculosConChofer)
+            {
+                swr.WriteLine(vc.BackUp());
+            }
+
+            swr.Close();
+            fls.Dispose();
+
+            return "Los datos han sido exportados exitosamente";
+        }
+
+        public string Importar(string path)
+        {
+            FileStream fls = new FileStream(path, FileMode.Open, FileAccess.Read);
+            StreamReader srd = new StreamReader(fls);
+            List<string> lineas = new List<string>();
+
+            while (srd.EndOfStream == false)
+            {
+                string linea = srd.ReadLine();
+                lineas.Add(linea);
+            }
+
+            foreach (string l in lineas)
+            {
+                string[] datos = l.Split(';');
+                Cliente cl;
+                Vehiculo vh;
+                Alquiler alq;
+
+                if (datos[0] == "alquiler")
+                {
+                    // 2 al 9
+                    cl = new Cliente(datos[2], datos[3], datos[4], datos[5], Convert.ToInt32(datos[6]),
+                        datos[7], datos[8], datos[9]);
+
+                    if (datos.Contains("chofer")==true)
+                    {
+                        // 11 al 25
+                        // alquiler con chofer
+                        vh = new VehiculoConChofer(datos[11], datos[12], datos[13], Convert.ToInt32(datos[14]), Convert.ToInt32(datos[15]),
+                            datos[17], datos[18], datos[19], datos[20], datos[21], datos[22],
+                            datos[23], datos[24], Convert.ToInt32(datos[25]));
+                        DateTime fecha = new DateTime();
+                        //alq = new Alquiler(cl, vh, )
+                    }
+                    else
+                    {
+                        // 11 al 15
+                        // Alquiler sin chofer
+                        vh = new Vehiculo(datos[11], datos[12], datos[13], Convert.ToInt32(datos[14]), Convert.ToInt32(datos[15]));
+                    }
+                }
+
+                else if (datos[0] == "vehiculo")
+                { 
+                    
+                }
+
+                else if (datos[0] == "vehiculoconchofer")
+                { 
+                    
+                }
+            }
+
+            srd.Close();
+            fls.Dispose();
+
+            return "Los datos han sido importados exitosamente";
         }
     }
 }
