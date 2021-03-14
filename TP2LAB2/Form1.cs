@@ -719,6 +719,7 @@ namespace TP2LAB2
         private void backUpToolStripMenuItem_Click(object sender, EventArgs e)
         {
             MessageBox.Show(miAdministracion.BackUp());
+
         }
 
         private void bt_Estadistica_Click(object sender, EventArgs e)
