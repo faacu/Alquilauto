@@ -114,7 +114,7 @@ namespace TP2LAB2
                             mostrar.Add(a);
                             break;
                         case 3:
-                            if (a.Capacidad == (Convert.ToInt32(cb_Combustible.Text)) && a.Disponible == true)
+                            if (a.Capacidad == (Convert.ToInt32(cb_Capacidad.Text)) && a.Disponible == true)
                                 mostrar.Add(a);
                             break;
                         case 4:
@@ -156,6 +156,7 @@ namespace TP2LAB2
                 dataGridView1.Rows[n].Cells[1].Value = a.Patente;
                 dataGridView1.Rows[n].Cells[2].Value = a.TipoCombustible;
                 dataGridView1.Rows[n].Cells[3].Value = a.Capacidad;
+                dataGridView1.Rows[n].Cells[4].Value = a.Valor;
             }
         }
 
@@ -181,19 +182,19 @@ namespace TP2LAB2
             {
                 try
                 {
-                string fecha = formalquiler.dateTimePickerNacimiento.ToString();
-                Cliente unCliente = new Cliente(formalquiler.tb_Nombre.Text, formalquiler.tb_Domicilio.Text, formalquiler.tb_EstadoCivil.Text, formalquiler.tb_Nacionalidad.Text, Convert.ToInt32(formalquiler.tb_Dni.Text), formalquiler.tb_CuitCuil.Text, formalquiler.tb_Telefono.Text, fecha);
-                DateTime fechaAlquiler = formalquiler.dateTimePicker1.Value;
-                bool chofer = true;
-                if (radioButtonChofer.Checked == true)
-                {
-                    chofer = true;
-                }
-                else if (radioButtonSinChofer.Checked == true)
-                {
-                    chofer = false;
-                }
-                int indice = miAdministracion.Alquiler(unCliente, fechaAlquiler, Convert.ToInt32(formalquiler.nud_Dias.Value), chofer, (string)dataGridView1.Rows[indiceDtgv].Cells[1].Value);
+                    DateTime fecha = formalquiler.dateTimePickerNacimiento.Value;
+                    Cliente unCliente = new Cliente(formalquiler.tb_Nombre.Text, formalquiler.tb_Domicilio.Text, formalquiler.tb_EstadoCivil.Text, formalquiler.tb_Nacionalidad.Text, Convert.ToInt32(formalquiler.tb_Dni.Text), formalquiler.tb_CuitCuil.Text, formalquiler.tb_Telefono.Text, fecha.ToString("dd/MM/yyyy"));
+                    DateTime fechaAlquiler = formalquiler.dateTimePicker1.Value;
+                    bool chofer = true;
+                    if (radioButtonChofer.Checked == true)
+                    {
+                        chofer = true;
+                    }
+                    else if (radioButtonSinChofer.Checked == true)
+                    {
+                        chofer = false;
+                    }
+                    int indice = miAdministracion.Alquiler(unCliente, fechaAlquiler, Convert.ToInt32(formalquiler.nud_Dias.Value), chofer, (string)dataGridView1.Rows[indiceDtgv].Cells[1].Value);
 
 
                     Conductor unConductor;
@@ -218,6 +219,7 @@ namespace TP2LAB2
                         while (h < formalquiler.nud_Conductores.Value)
                         {
                             factura.conductores[h] = miAdministracion.Consulta(indice).VerConductor(h);
+                            factura.carnet[h] = miAdministracion.Consulta(indice).ImagenConductor(h).Foto;
                             h++;
                         }
                     }
@@ -251,11 +253,17 @@ namespace TP2LAB2
                     if (miAdministracion.BuscarVehiculo(agregarauto.tb_Patente.Text, true) >= 0 || miAdministracion.BuscarVehiculo(agregarauto.tb_Patente.Text, false) >= 0)
                     {
                         MessageBox.Show("La patente actual ya existe.\nVerifique los datos del vehiculo");
+                        agregarauto.tb_Patente.Text = "";
+                        agregarauto.ShowDialog();
+                        Image imagen = Image.FromFile(agregarauto.archivoImagen.FileName);
+                        Vehiculo nuevoVehiculo = new VehiculoConChofer(agregarauto.tb_Marca.Text, agregarauto.cb_Combustible.Text, agregarauto.tb_Patente.Text, Convert.ToInt32(agregarauto.nud_Capacidad.Value), Convert.ToInt32(agregarauto.nud_Valor.Value), agregarauto.tb_Nombre.Text, agregarauto.tb_Domicilio.Text, agregarauto.tb_EstadoCivil.Text, agregarauto.tb_Nacionalidad.Text, agregarauto.tb_Dni.Text, agregarauto.tb_CuitCuil.Text, agregarauto.tb_Telefono.Text, agregarauto.dateTimePickerNac.Value.ToString("dd/MM/yyyy"), Convert.ToInt32(agregarauto.nud_Edad.Value));
+                        nuevoVehiculo.Imagen = imagen;
+                        miAdministracion.AgregarVehiculo(nuevoVehiculo);
                     }
                     else
                     {
                         Image imagen = Image.FromFile(agregarauto.archivoImagen.FileName);
-                        Vehiculo nuevoVehiculo = new VehiculoConChofer(agregarauto.tb_Marca.Text, agregarauto.cb_Combustible.Text, agregarauto.tb_Patente.Text, Convert.ToInt32(agregarauto.nud_Capacidad.Value), Convert.ToInt32(agregarauto.nud_Valor.Value), agregarauto.tb_Nombre.Text, agregarauto.tb_Domicilio.Text, agregarauto.tb_EstadoCivil.Text, agregarauto.tb_Nacionalidad.Text, agregarauto.tb_Dni.Text, agregarauto.tb_CuitCuil.Text, agregarauto.tb_Telefono.Text, agregarauto.dateTimePickerNac.ToString(), Convert.ToInt32(agregarauto.nud_Edad.Value));
+                        Vehiculo nuevoVehiculo = new VehiculoConChofer(agregarauto.tb_Marca.Text, agregarauto.cb_Combustible.Text, agregarauto.tb_Patente.Text, Convert.ToInt32(agregarauto.nud_Capacidad.Value), Convert.ToInt32(agregarauto.nud_Valor.Value), agregarauto.tb_Nombre.Text, agregarauto.tb_Domicilio.Text, agregarauto.tb_EstadoCivil.Text, agregarauto.tb_Nacionalidad.Text, agregarauto.tb_Dni.Text, agregarauto.tb_CuitCuil.Text, agregarauto.tb_Telefono.Text, agregarauto.dateTimePickerNac.Value.ToString("dd/MM/yyyy"), Convert.ToInt32(agregarauto.nud_Edad.Value));
                         nuevoVehiculo.Imagen = imagen;
                         miAdministracion.AgregarVehiculo(nuevoVehiculo);
                     }
@@ -264,13 +272,19 @@ namespace TP2LAB2
                 {
                     if (miAdministracion.BuscarVehiculo(agregarauto.tb_Patente.Text, false) >= 0 || miAdministracion.BuscarVehiculo(agregarauto.tb_Patente.Text, true) >= 0)
                     {
-                           MessageBox.Show("La patente actual ya existe.\nVerifique los datos del vehiculo");
+                        MessageBox.Show("La patente actual ya existe.\nVerifique los datos del vehiculo");
+                        agregarauto.tb_Patente.Text = "";
+                        agregarauto.ShowDialog();
+                        Image imagen = Image.FromFile(agregarauto.archivoImagen.FileName);
+                        Vehiculo nuevoVehiculo = new Vehiculo(agregarauto.tb_Marca.Text, agregarauto.cb_Combustible.Text, agregarauto.tb_Patente.Text, Convert.ToInt32(agregarauto.nud_Capacidad.Value), Convert.ToInt32(agregarauto.nud_Valor.Value));
+                        nuevoVehiculo.Imagen = imagen;
+                        miAdministracion.AgregarVehiculo(nuevoVehiculo);
                     }
                     else
                     {
-                            Image imagen = Image.FromFile(agregarauto.archivoImagen.FileName);
-                            Vehiculo nuevoVehiculo = new Vehiculo(agregarauto.tb_Marca.Text, agregarauto.cb_Combustible.Text, agregarauto.tb_Patente.Text, Convert.ToInt32(agregarauto.nud_Capacidad.Value), Convert.ToInt32(agregarauto.nud_Valor.Value));
-                            nuevoVehiculo.Imagen = imagen;
+                        Image imagen = Image.FromFile(agregarauto.archivoImagen.FileName);
+                        Vehiculo nuevoVehiculo = new Vehiculo(agregarauto.tb_Marca.Text, agregarauto.cb_Combustible.Text, agregarauto.tb_Patente.Text, Convert.ToInt32(agregarauto.nud_Capacidad.Value), Convert.ToInt32(agregarauto.nud_Valor.Value));
+                        nuevoVehiculo.Imagen = imagen;
                         miAdministracion.AgregarVehiculo(nuevoVehiculo);
                     }
                 }
@@ -291,7 +305,7 @@ namespace TP2LAB2
         {
             ActualizarUnidad.ShowDialog();
 
-            if (ActualizarUnidad.bt_Aceptar.DialogResult == DialogResult.OK)
+            if (ActualizarUnidad.DialogResult == DialogResult.OK)
                 miAdministracion.EditarUnidades(Convert.ToDouble(ActualizarUnidad.tb_Precio.Text));
         }
 
@@ -338,6 +352,8 @@ namespace TP2LAB2
             else if (rb_Marca.Checked == false)
             {
                 cb_Marca.Enabled = false;
+                cb_Marca.Items.Clear();
+                cb_Marca.Text = "";
             }
             filtro = 4;
             miAdministracion.OrdenarLista(4, chofer);
@@ -352,6 +368,8 @@ namespace TP2LAB2
             else if (rb_Pasajeros.Checked == false)
             {
                 cb_Capacidad.Enabled = false;
+                cb_Capacidad.Items.Clear();
+                cb_Capacidad.Text = "";
             }
             filtro = 3;
             miAdministracion.OrdenarLista(filtro, chofer);
@@ -366,6 +384,8 @@ namespace TP2LAB2
             else if (rb_Combustible.Checked == false)
             {
                 cb_Combustible.Enabled = false;
+                cb_Combustible.Items.Clear();
+                cb_Combustible.Text = "";
             }
             filtro = 2;
             miAdministracion.OrdenarLista(filtro, chofer);
@@ -409,6 +429,7 @@ namespace TP2LAB2
                     factura.texto[1] = "(Comprobante válido de pago)";
                     factura.texto[2] = texto;
                     factura.label1.Text = texto;
+                    factura.mostrarconductores = false;
                     factura.ShowDialog();
                     devolucion.LimpiarControles();
                 }
@@ -422,6 +443,9 @@ namespace TP2LAB2
 
         private void button1_Click(object sender, EventArgs e)//boton agregar
         {
+            cb_Capacidad.Items.Clear();
+            cb_Combustible.Items.Clear();
+            cb_Marca.Items.Clear();
             // 1. Patente - 2. Tipo Combustible - 3. Capacidad - 4. Marca
             if (chofer == true)
             {
@@ -539,7 +563,7 @@ namespace TP2LAB2
             if(registro.DialogResult == DialogResult.OK)
             {
                 if (registro.bt_Borrar.DialogResult==DialogResult.OK && registro.listBox1.SelectedIndex >=0)
-                miAdministracion.EditarRegistro(registro.listBox1.SelectedIndex);
+                    miAdministracion.EditarRegistro(registro.listBox1.SelectedIndex);
             }
             else
             {
@@ -608,8 +632,6 @@ namespace TP2LAB2
             buttonBaja.Visible = false;
             dataGridView1.Rows.Clear();
         }
-
-        int contChofer = 0, contSChofer = 0,contCapacidad4 = 0, contCapacidad5 = 0;
 
         private void alquileresToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -681,10 +703,12 @@ namespace TP2LAB2
         {
             OpenFileDialog archivo = new OpenFileDialog();
             archivo.ShowDialog();
-            if (Directory.Exists(archivo.FileName)==true)
-                MessageBox.Show(miAdministracion.Importar(archivo.FileName));
-            else
-                MessageBox.Show("Archivo o directorio no encontrado");
+            MessageBox.Show(miAdministracion.Importar(archivo.FileName));
+        }
+
+        private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
         }
 
         private void vehiculosToolStripMenuItem_Click(object sender, EventArgs e)
@@ -699,7 +723,11 @@ namespace TP2LAB2
 
         private void bt_Estadistica_Click(object sender, EventArgs e)
         {
-            foreach (Alquiler a in miAdministracion.VerAlquiler)
+            int contChofer = 0;
+            int contSChofer = 0;
+            int contCapacidad4 = 0;
+            int contCapacidad5 = 0;
+            foreach (Alquiler a in miAdministracion.Historico)
             {
                 if (a.Auto is VehiculoConChofer)
                     contChofer++;
@@ -707,7 +735,7 @@ namespace TP2LAB2
                     contSChofer++;
             }
 
-            foreach (Alquiler a in miAdministracion.VerAlquiler)
+            foreach (Alquiler a in miAdministracion.Historico)
             {
                 if (a.Auto.Capacidad == 4)
                 {
@@ -719,13 +747,13 @@ namespace TP2LAB2
                 }
             }
 
-            if (miAdministracion.VerAlquiler.Count > 0)
+            if (miAdministracion.Historico.Count > 0)
             {
                 diagrama.contChofer = contChofer;
                 diagrama.contSchofer = contSChofer;
                 diagrama.contCantidad4 = contCapacidad4;
                 diagrama.contCantidad5 = contCapacidad5;
-                diagrama.total = miAdministracion.VerAlquiler.Count;
+                diagrama.total = miAdministracion.Historico.Count;
                 diagrama.ShowDialog();
             }
             else

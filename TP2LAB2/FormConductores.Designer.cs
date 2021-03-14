@@ -90,6 +90,7 @@
             this.Controls.Add(this.bt_Ingresar);
             this.Name = "FormConductores";
             this.Text = "Ingresar Conductores";
+            this.Load += new System.EventHandler(this.FormConductores_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

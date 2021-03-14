@@ -53,6 +53,7 @@
             this.Patente = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Combustible = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Capacidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Valor = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.radioButtonSinChofer = new System.Windows.Forms.RadioButton();
             this.radioButtonChofer = new System.Windows.Forms.RadioButton();
@@ -62,11 +63,11 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.menuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.backUpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.importarDatosDesdeArchivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ayudaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.agregarUsuarioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.importarDatosDesdeArchivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gb_Busqueda.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -274,7 +275,7 @@
             // 
             // bt_Buscar
             // 
-            this.bt_Buscar.Location = new System.Drawing.Point(517, 379);
+            this.bt_Buscar.Location = new System.Drawing.Point(603, 381);
             this.bt_Buscar.Name = "bt_Buscar";
             this.bt_Buscar.Size = new System.Drawing.Size(75, 23);
             this.bt_Buscar.TabIndex = 6;
@@ -286,7 +287,7 @@
             // 
             this.bt_Salir.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.bt_Salir.Image = ((System.Drawing.Image)(resources.GetObject("bt_Salir.Image")));
-            this.bt_Salir.Location = new System.Drawing.Point(471, 548);
+            this.bt_Salir.Location = new System.Drawing.Point(557, 548);
             this.bt_Salir.Name = "bt_Salir";
             this.bt_Salir.Size = new System.Drawing.Size(121, 40);
             this.bt_Salir.TabIndex = 19;
@@ -297,7 +298,7 @@
             // 
             // bt_Limpiar
             // 
-            this.bt_Limpiar.Location = new System.Drawing.Point(426, 379);
+            this.bt_Limpiar.Location = new System.Drawing.Point(522, 381);
             this.bt_Limpiar.Name = "bt_Limpiar";
             this.bt_Limpiar.Size = new System.Drawing.Size(75, 23);
             this.bt_Limpiar.TabIndex = 22;
@@ -312,10 +313,11 @@
             this.Modelo,
             this.Patente,
             this.Combustible,
-            this.Capacidad});
-            this.dataGridView1.Location = new System.Drawing.Point(147, 86);
+            this.Capacidad,
+            this.Valor});
+            this.dataGridView1.Location = new System.Drawing.Point(135, 86);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(445, 287);
+            this.dataGridView1.Size = new System.Drawing.Size(543, 287);
             this.dataGridView1.TabIndex = 23;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
@@ -339,6 +341,11 @@
             // 
             this.Capacidad.HeaderText = "Capacidad";
             this.Capacidad.Name = "Capacidad";
+            // 
+            // Valor
+            // 
+            this.Valor.HeaderText = "Valor";
+            this.Valor.Name = "Valor";
             // 
             // groupBox1
             // 
@@ -391,7 +398,7 @@
             // 
             // buttonBaja
             // 
-            this.buttonBaja.Location = new System.Drawing.Point(341, 379);
+            this.buttonBaja.Location = new System.Drawing.Point(441, 381);
             this.buttonBaja.Name = "buttonBaja";
             this.buttonBaja.Size = new System.Drawing.Size(75, 23);
             this.buttonBaja.TabIndex = 26;
@@ -419,9 +426,10 @@
             this.menuToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(604, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(690, 24);
             this.menuStrip1.TabIndex = 28;
             this.menuStrip1.Text = "menuStrip1";
+            this.menuStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.menuStrip1_ItemClicked);
             // 
             // menuToolStripMenuItem
             // 
@@ -442,10 +450,17 @@
             this.backUpToolStripMenuItem.Text = "Exportar datos";
             this.backUpToolStripMenuItem.Click += new System.EventHandler(this.backUpToolStripMenuItem_Click);
             // 
+            // importarDatosDesdeArchivoToolStripMenuItem
+            // 
+            this.importarDatosDesdeArchivoToolStripMenuItem.Name = "importarDatosDesdeArchivoToolStripMenuItem";
+            this.importarDatosDesdeArchivoToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
+            this.importarDatosDesdeArchivoToolStripMenuItem.Text = "Importar desde archivo";
+            this.importarDatosDesdeArchivoToolStripMenuItem.Click += new System.EventHandler(this.importarDatosDesdeArchivoToolStripMenuItem_Click);
+            // 
             // ayudaToolStripMenuItem
             // 
             this.ayudaToolStripMenuItem.Name = "ayudaToolStripMenuItem";
-            this.ayudaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.ayudaToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
             this.ayudaToolStripMenuItem.Text = "Ayuda ";
             this.ayudaToolStripMenuItem.Click += new System.EventHandler(this.ayudaToolStripMenuItem_Click);
             // 
@@ -453,14 +468,14 @@
             // 
             this.agregarUsuarioToolStripMenuItem.Enabled = false;
             this.agregarUsuarioToolStripMenuItem.Name = "agregarUsuarioToolStripMenuItem";
-            this.agregarUsuarioToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.agregarUsuarioToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
             this.agregarUsuarioToolStripMenuItem.Text = "Agregar Usuario";
             this.agregarUsuarioToolStripMenuItem.Click += new System.EventHandler(this.agregarUsuarioToolStripMenuItem_Click);
             // 
             // pictureBox1
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(148, 27);
+            this.pictureBox1.Location = new System.Drawing.Point(177, 27);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(444, 51);
             this.pictureBox1.TabIndex = 29;
@@ -475,18 +490,11 @@
             this.pictureBox2.TabIndex = 1;
             this.pictureBox2.TabStop = false;
             // 
-            // importarDatosDesdeArchivoToolStripMenuItem
-            // 
-            this.importarDatosDesdeArchivoToolStripMenuItem.Name = "importarDatosDesdeArchivoToolStripMenuItem";
-            this.importarDatosDesdeArchivoToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
-            this.importarDatosDesdeArchivoToolStripMenuItem.Text = "Importar desde archivo";
-            this.importarDatosDesdeArchivoToolStripMenuItem.Click += new System.EventHandler(this.importarDatosDesdeArchivoToolStripMenuItem_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(604, 600);
+            this.ClientSize = new System.Drawing.Size(690, 600);
             this.Controls.Add(this.tb_Tipo);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.pictureBox1);
@@ -565,6 +573,7 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.ToolStripMenuItem importarDatosDesdeArchivoToolStripMenuItem;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Valor;
     }
 }
 

@@ -44,8 +44,8 @@ namespace TP2LAB2
                     pictureBox1.CreateGraphics().DrawPie(pen, rec, AnguloInicial, AnguloBarrido);
                     pictureBoxSeleccion.BackColor = Color.Orange;
                     pictureBox3.BackColor = Color.DarkViolet;
-                    labelSeleccion.Text = "Chofer";
-                    label2.Text = "Sin Chofer";
+                    labelSeleccion.Text = "Chofer: "+contChofer;
+                    label2.Text = "Sin Chofer: "+contSchofer;
                 }
                 catch (Exception error)
                 {
@@ -56,7 +56,6 @@ namespace TP2LAB2
                     ConChofer.Dispose();
                     SinChofer.Dispose();
                     pen.Dispose();
-                    //pictureBox1.Dispose();
                     AnguloInicial = 0;
                     AnguloBarrido = 0;
                     angRestante = 0;
@@ -68,8 +67,10 @@ namespace TP2LAB2
                 int alto = pictureBox1.Height - 100;
 
                 // porcentajes
+
                 float PorCant4 = contCantidad4 * 100 / total;
                 float PorCant5 = contCantidad5 * 100 / total;
+
 
                 float AnguloInicial = 0;
                 float AnguloBarrido = PorCant4 * 360 / 100;
@@ -87,8 +88,8 @@ namespace TP2LAB2
                     pictureBox1.CreateGraphics().DrawPie(pen, rec, AnguloInicial, AnguloBarrido);
                     pictureBoxSeleccion.BackColor = Color.DarkViolet;
                     pictureBox3.BackColor = Color.Orange;
-                    labelSeleccion.Text = "4 personas";
-                    label2.Text = "5 personas";
+                    labelSeleccion.Text = "4 personas: "+contCantidad4;
+                    label2.Text = "5 personas: "+contCantidad5;
                 }
                 catch (Exception error)
                 {
@@ -99,7 +100,6 @@ namespace TP2LAB2
                     second.Dispose();
                     brush.Dispose();
                     pen.Dispose();
-                    //pictureBox1.Dispose();
                     AnguloInicial = 0;
                     AnguloBarrido = 0;
                     angRestante = 0;
@@ -118,26 +118,5 @@ namespace TP2LAB2
         {
             this.Close();
         }
-
-        //public int SChofer
-        //{
-        //    get { return contSchofer; }
-        //    set { value = contSchofer; }
-        //}
-        //public int Capacidad4
-        //{
-        //    get { return contCantidad4; }
-        //    set { value = contCantidad4; }
-        //}
-        //public int Capacidad5
-        //{
-        //    get { return contCantidad5; }
-        //    set { value = contCantidad5; }
-        //}
-        //public int Total
-        //{
-        //    get { return total; }
-        //    set { value = total; }
-        //}
     }
 }

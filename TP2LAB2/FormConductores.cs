@@ -27,5 +27,10 @@ namespace TP2LAB2
         {
 
         }
+
+        private void FormConductores_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

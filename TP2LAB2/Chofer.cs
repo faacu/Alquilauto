@@ -35,8 +35,18 @@ namespace TP2LAB2
                 + dni + ";"
                 + cuitCuil + ";"
                 + telefono + ";"
-                + edad + ";"
-                + fechaNac;  
+                + fechaNac + ";"
+                + edad;  
         }
     }
 }
+
+//string nombre, 
+//string domicilio, 
+//string estadoCivil, 
+//string nacionalidad, 
+//string dni, 
+//string cuitCuil, 
+//string telefono, 
+//string fechaNac, 
+//int edad

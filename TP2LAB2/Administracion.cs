@@ -142,6 +142,7 @@ namespace TP2LAB2
             alquiler.KmRecorridos = km;
             registro.RemoveAt(indice);
             int dias = fecha.Day - alquiler.Fecha.Day;
+            alquiler.DiasTranscurridos = dias;
             int demora = 0;
 
             if (dias <= alquiler.Dias && fecha.Hour < 22)
@@ -156,6 +157,7 @@ namespace TP2LAB2
                     demora++;
                 }
                 alquiler.PrecioFinal += alquiler.Precio + alquiler.Auto.Valor * alquiler.UnidadCosto * 1.10 * demora;
+                alquiler.AdicionalDias = alquiler.Auto.Valor * alquiler.UnidadCosto * 1.10 * demora;
             }
 
             double kmPermitidos = (alquiler.Dias + demora) * 500;
@@ -165,10 +167,12 @@ namespace TP2LAB2
                 if (diferencia <= 100)
                 {
                     alquiler.PrecioFinal += diferencia * 3 * alquiler.UnidadCosto;
+                    alquiler.AdicionalKm= diferencia * 3 * alquiler.UnidadCosto;
                 }
                 else if (diferencia > 100)
                 {
                     alquiler.PrecioFinal += diferencia * 5 * alquiler.UnidadCosto;
+                    alquiler.AdicionalKm = diferencia * 5 * alquiler.UnidadCosto;
                 }
             }
 
@@ -206,8 +210,36 @@ namespace TP2LAB2
         {
             string texto;
             if (alquiler.Auto is VehiculoConChofer)
-                texto = "Razon Social: " + empresa.RazonSocial + "\nCliente: " + alquiler.VerCliente.Nombre + "\nCuit: " + alquiler.VerCliente.cuitCuil + "\nPatente: " + alquiler.Auto.Patente + "Km recorridos: " + alquiler.KmRecorridos + "\nValor Inicial: $" + alquiler.Precio.ToString() + "\nViáticos: $" + alquiler.Viaticos + "\nValor Final: $" + alquiler.PrecioFinal;
-            else texto = "Razon Social: " + empresa.RazonSocial + "\nCliente: " + alquiler.VerCliente.Nombre + "\nCuit: " + alquiler.VerCliente.cuitCuil + "\nPatente: " + alquiler.Auto.Patente + "Km recorridos: " + alquiler.KmRecorridos + "\nValor Inicial: $" + alquiler.Precio.ToString() + "\nValor Final: $" + alquiler.PrecioFinal;
+            {
+                texto = "Razon Social:  " + empresa.RazonSocial +
+                    "\nCliente: " + alquiler.VerCliente.Nombre +
+                    "\nCuit:    " + alquiler.VerCliente.cuitCuil +
+                    "\nPatente: " + alquiler.Auto.Patente +
+                    "\nKm permitidos:   " + alquiler.Dias * 500 +
+                    "\nKm recorridos:   " + alquiler.KmRecorridos +
+                    "\nAdicional por km:    $" + alquiler.AdicionalKm +
+                    "\nDias permitidos: " + alquiler.Dias +
+                    "\nDias transcurridos:  " + alquiler.DiasTranscurridos +
+                    "\nAdicional dias:  $" + alquiler.AdicionalDias +
+                    "\nViáticos:    $" + alquiler.Viaticos +
+                    "\nValor Inicial:   $" + alquiler.Precio.ToString() +
+                    "\nValor Final: $" + alquiler.PrecioFinal;
+            }
+            else
+            {
+                texto = "Razon Social:  " + empresa.RazonSocial +
+                      "\nCliente:   " + alquiler.VerCliente.Nombre +
+                      "\nCuit:  " + alquiler.VerCliente.cuitCuil +
+                      "\nPatente:   " + alquiler.Auto.Patente +
+                      "\nKm permitidos: " + alquiler.Dias * 500 +
+                      "\nKm recorridos: " + alquiler.KmRecorridos +
+                      "\nAdicional por km:  $" + alquiler.AdicionalKm +
+                      "\nDias permitidos:   " + alquiler.Dias +
+                      "\nDias transcurridos:    " + alquiler.DiasTranscurridos +
+                      "\nAdicional dias:    $" + alquiler.AdicionalDias +
+                      "\nValor Inicial: $" + alquiler.Precio.ToString() +
+                      "\nValor Final:   $" + alquiler.PrecioFinal;
+            }
 
             return texto;
         }
@@ -240,7 +272,6 @@ namespace TP2LAB2
         }
         public string BackUp()
         {
-            //string archivo = "BackUp(" + DateTime.Now + ").csv";
             FileStream fls = new FileStream("Back Up.csv", FileMode.Create, FileAccess.Write);
             StreamWriter swr = new StreamWriter(fls);
 
@@ -265,7 +296,7 @@ namespace TP2LAB2
 
         public string Importar(string path)
         {
-            FileStream fls = new FileStream(path, FileMode.Open, FileAccess.Read);
+            FileStream fls = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read);
             StreamReader srd = new StreamReader(fls);
             List<string> lineas = new List<string>();
 
@@ -274,6 +305,11 @@ namespace TP2LAB2
                 string linea = srd.ReadLine();
                 lineas.Add(linea);
             }
+
+            BackUp();
+            registro.Clear();
+            listaDeVehiculos.Clear();
+            listaDeVehiculosConChofer.Clear();
 
             foreach (string l in lineas)
             {
@@ -288,32 +324,42 @@ namespace TP2LAB2
                     cl = new Cliente(datos[2], datos[3], datos[4], datos[5], Convert.ToInt32(datos[6]),
                         datos[7], datos[8], datos[9]);
 
-                    if (datos.Contains("chofer")==true)
+                    if (datos.Contains("chofer") == true)
                     {
-                        // 11 al 25
+                        // 12 al 25
                         // alquiler con chofer
-                        vh = new VehiculoConChofer(datos[11], datos[12], datos[13], Convert.ToInt32(datos[14]), Convert.ToInt32(datos[15]),
-                            datos[17], datos[18], datos[19], datos[20], datos[21], datos[22],
-                            datos[23], datos[24], Convert.ToInt32(datos[25]));
-                        DateTime fecha = new DateTime();
-                        //alq = new Alquiler(cl, vh, )
+                        vh = new VehiculoConChofer(datos[12], datos[13], datos[14], Convert.ToInt32(datos[15]), Convert.ToInt32(datos[16]),
+                            datos[18], datos[19], datos[20], datos[21], datos[22], datos[23],
+                            datos[24], datos[25], Convert.ToInt32(datos[26]));
+                        DateTime fecha = DateTime.Parse(datos[27]);
+                        alq = new Alquiler(cl, vh, fecha, Convert.ToInt32(datos[28]),
+                            Convert.ToDouble(datos[29]));
                     }
                     else
                     {
                         // 11 al 15
                         // Alquiler sin chofer
                         vh = new Vehiculo(datos[11], datos[12], datos[13], Convert.ToInt32(datos[14]), Convert.ToInt32(datos[15]));
+                        DateTime fecha = DateTime.Parse(datos[16]);
+                        alq = new Alquiler(cl, vh, fecha, Convert.ToInt32(datos[17]),
+                            Convert.ToDouble(datos[18]));
                     }
+                    registro.Add(alq);
+
                 }
 
                 else if (datos[0] == "vehiculo")
-                { 
-                    
+                {
+                    vh = new Vehiculo(datos[1], datos[2], datos[3], Convert.ToInt32(datos[4]), Convert.ToInt32(datos[5]));
+                    listaDeVehiculos.Add(vh);
                 }
 
                 else if (datos[0] == "vehiculoconchofer")
-                { 
-                    
+                {
+                    VehiculoConChofer vhcc = new VehiculoConChofer(datos[2], datos[3], datos[4], Convert.ToInt32(datos[5]), Convert.ToInt32(datos[6]),
+                            datos[8], datos[9], datos[10], datos[11], datos[12], datos[13],
+                            datos[14], datos[15], Convert.ToInt32(datos[16]));
+                    listaDeVehiculosConChofer.Add(vhcc);
                 }
             }
 

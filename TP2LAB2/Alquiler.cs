@@ -18,6 +18,32 @@ namespace TP2LAB2
         readonly int orden;
         double precio, viaticos, preciofinal, kmrecorridos;
         List<Conductor> conductores = new List<Conductor>();
+        double adicionalkm = 0;
+        double adicionaldias = 0;
+        int diastranscurridos = 0, cantConductor = 0;//
+
+        public int DiasTranscurridos
+        {
+            get { return diastranscurridos; }
+            set { diastranscurridos = value; }
+        }
+
+        public double AdicionalKm
+        {
+            get { return adicionalkm; }
+            set { adicionalkm = value; }
+        }
+
+        public double AdicionalDias
+        {
+            get { return adicionaldias; }
+            set { adicionaldias = value; }
+        }
+
+        public int CantConductores //
+        {
+            get { return cantConductor; }
+        }
 
         //Constructor
         public Alquiler(Cliente cliente, Vehiculo auto, DateTime fecha, int dias, double valorUnidadCosto)
@@ -36,6 +62,7 @@ namespace TP2LAB2
         public void AgregarConductor(Conductor unConductor)
         {
             conductores.Add(unConductor);
+            cantConductor++;
         }
 
         public void CostoInicial()
@@ -53,7 +80,12 @@ namespace TP2LAB2
 
         public string VerConductor(int indice)
         {
-            return "Nombre: " + conductores[indice].Nombre + "\nNro. Carnet: " + conductores[indice].Carnet;
+            return "Nombre: " + conductores[indice].Nombre + "\nNro. Carnet: " + conductores[indice].Carnet + "\nModelo: " + auto.Modelo + "\nPatente: " + auto.Patente + "\nCombustible: " + auto.TipoCombustible + "\nCapacidad: " + auto.Capacidad + "\nValor: " + auto.Valor;
+        }
+
+        public Conductor ImagenConductor(int indice)
+        {
+            return conductores[indice];
         }
 
         public string BackUp()
@@ -61,7 +93,7 @@ namespace TP2LAB2
             return "alquiler;"
                 + cliente.BackUp() 
                 + ';' + auto.BackUp() 
-                + ';' + fecha
+                + ';' + fecha.ToString("dd/MM/yyyy")
                 + ';' + dias
                 + ';' + UnidadCosto;
         }

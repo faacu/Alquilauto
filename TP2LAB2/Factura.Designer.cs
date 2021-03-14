@@ -50,10 +50,11 @@
             this.label1.Size = new System.Drawing.Size(35, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "label1";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // bt_Aceptar
             // 
-            this.bt_Aceptar.Location = new System.Drawing.Point(70, 194);
+            this.bt_Aceptar.Location = new System.Drawing.Point(70, 228);
             this.bt_Aceptar.Name = "bt_Aceptar";
             this.bt_Aceptar.Size = new System.Drawing.Size(159, 32);
             this.bt_Aceptar.TabIndex = 1;
@@ -85,21 +86,21 @@
             // imprimirToolStripMenuItem
             // 
             this.imprimirToolStripMenuItem.Name = "imprimirToolStripMenuItem";
-            this.imprimirToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.imprimirToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
             this.imprimirToolStripMenuItem.Text = "Imprimir";
             this.imprimirToolStripMenuItem.Click += new System.EventHandler(this.imprimirToolStripMenuItem_Click);
             // 
             // vistaPreviaToolStripMenuItem
             // 
             this.vistaPreviaToolStripMenuItem.Name = "vistaPreviaToolStripMenuItem";
-            this.vistaPreviaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.vistaPreviaToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
             this.vistaPreviaToolStripMenuItem.Text = "Vista Previa";
             this.vistaPreviaToolStripMenuItem.Click += new System.EventHandler(this.vistaPreviaToolStripMenuItem_Click);
             // 
             // configurarPáginaToolStripMenuItem
             // 
             this.configurarPáginaToolStripMenuItem.Name = "configurarPáginaToolStripMenuItem";
-            this.configurarPáginaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.configurarPáginaToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
             this.configurarPáginaToolStripMenuItem.Text = "Configurar Página";
             this.configurarPáginaToolStripMenuItem.Click += new System.EventHandler(this.configurarPáginaToolStripMenuItem_Click);
             // 
@@ -134,6 +135,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Factura";
             this.Text = "Factura";
+            this.Load += new System.EventHandler(this.Factura_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);

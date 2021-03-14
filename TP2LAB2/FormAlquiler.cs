@@ -57,12 +57,12 @@ namespace TP2LAB2
                         int z = 11 - (calculo % 11);
                         if (identificador == Convert.ToString(z))
                         {
-                            MessageBox.Show("Cuil/Cuit correcto");
                             this.Close();
                         }
                         else
                         {
                             MessageBox.Show("Cuil/Cuit incorrecto.\nVuelva a intentarlo!");
+                            DialogResult = DialogResult.Cancel;
                         }
                     }
                     catch (ArgumentOutOfRangeException)
@@ -127,6 +127,11 @@ namespace TP2LAB2
         {
             path3 = new OpenFileDialog();
             path3.ShowDialog();
+        }
+
+        private void tb_CuitCuil_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

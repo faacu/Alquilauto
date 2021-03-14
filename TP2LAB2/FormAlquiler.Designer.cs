@@ -423,6 +423,7 @@
             this.tb_CuitCuil.Name = "tb_CuitCuil";
             this.tb_CuitCuil.Size = new System.Drawing.Size(223, 20);
             this.tb_CuitCuil.TabIndex = 10;
+            this.tb_CuitCuil.TextChanged += new System.EventHandler(this.tb_CuitCuil_TextChanged);
             // 
             // tb_Dni
             // 

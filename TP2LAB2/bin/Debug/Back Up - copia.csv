@@ -1,0 +1,16 @@
+alquiler;cliente;Agustin Ormache;Sarmiento 229;Soltero;Argentino;35707358;20357073589;3435091735;09/02/2021;vehiculoconchofer;vehiculo;Renauld Kwid 1.0;Nafta;444 ddd;4;60;chofer;Juan Perez;Alcorta 222;Casado;Argentina;22300444;20223004449;4222333;09/02/2021;38;09/02/2021;3;25
+alquiler;cliente;Jeferson Martinez;Cosquin 1234;Casado;Argentina;26789453;21267894538;2324345;19/10/1937;vehiculo;Chevrolet Corsa;GNC;333 ccc;5;1;23/02/2021;7;250
+alquiler;cliente;Juan Cho;Giles 345;Soltero;China;12234234;21122342349;3434433;13/02/1900;vehiculo;Fiat Mobi;Nafta;aa 856 tv;4;78;23/02/2021;3;250
+alquiler;cliente;Kakaroto;julio 12;Soltero;China;12234324;21122343249;2112234;02/03/1911;vehiculo;Nissan Sentra;Diesel;obb 234;5;76;23/02/2021;3;250
+vehiculo;Chevrolet Aveo;Nafta;aa 001 sv;5;75
+vehiculo;Chevrolet Corsa;Diesel;npc 234;4;54
+vehiculo;Chevrolet Corsa;GNC;333 ccc;5;1
+vehiculo;Fiat Mobi;Nafta;aa 856 tv;4;78
+vehiculo;Gol Trend 1.6;Nafta;100 aaa;5;50
+vehiculo;Nissan March;Diesel;222 bbb;4;40
+vehiculo;Nissan Sentra;Diesel;obb 234;5;76
+vehiculoconchofer;vehiculo;Renauld Kwid 1.0;Nafta;444 ddd;4;60;chofer;Juan Perez;Alcorta 222;Casado;Argentina;22300444;20223004449;4222333;09/02/2021;38
+vehiculoconchofer;vehiculo;Nissan Sentra;Diesel;666 ggg;5;80;chofer;Luis Garcia;Sarmiento 333;Casado;Argentina;13455678;20134556787;1234;09/02/2021;60
+vehiculoconchofer;vehiculo;Toyota Hilux;Diesel;777 vvv;5;100;chofer;Hector Bertoluzzi;Alameda 111;Soltero;Argentina;20445556;20204455569;1234;09/02/2021;50
+vehiculoconchofer;vehiculo;Polo;GNC;ab 319 gh;5;99;chofer;Marcelo Gallo;Miguel David 564;Soltero;Argentina;19678345;20196783459;4343576;10/06/1924;52
+vehiculoconchofer;vehiculo;Toyota Corolla;Nafta;ouh 298;5;68;chofer;Julian Vierra;San Luis 2345;Casado;Argentina;24678564;82467856411;4646789;27/11/1974;47
