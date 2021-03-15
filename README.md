@@ -24,7 +24,7 @@ The app have more functions that you can investigate...
 Taxes:
 
 For day of rent, the client have 500 km free if the client pass this km: 
-between 1 to 100 km = 3 units for km | 
-more than 100 km = 5 units for km |
+																		between 1 to 100 km = 3 units for km |
+																		more than 100 km = 5 units for km |
 If it a vehicle with drive the client pay viatic = 140 units more |
 The client have a date to return maximun 22 hour of these day, if pass.. applied 110 % penalty fee for the value of day of rent, for every day pass
